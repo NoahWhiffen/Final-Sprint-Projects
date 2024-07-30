@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "name": "John Smith",
+        "age": 39,
+        "student": false,
+        "courses": null
+    },
+    {
+        "id": 2,
+        "name": "Jane Smith",
+        "age": 37,
+        "student": false,
+        "courses": null
+    },
+    {
+        "id": 3,
+        "name": "Jack Smith",
+        "age": 17,
+        "student": true,
+        "courses": ["Computer Science", "Math", "Biology"]
+    },
+    {
+        "id": 4,
+        "name": "William Smith",
+        "age": 21,
+        "student": true,
+        "courses": ["English", "Art", "History"]
+    },
+    {
+        "id": 5,
+        "name": "Jimmy Smith",
+        "age": 23,
+        "student": true,
+        "courses": ["Chemistry", "Calculus", "Physics"]
+    },
+    {
+        "id": 6,
+        "name": "Jacob Smith",
+        "age": 77,
+        "student": false,
+        "courses": null
+    }
+]
