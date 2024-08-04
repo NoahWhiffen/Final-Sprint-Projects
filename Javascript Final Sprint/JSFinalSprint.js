@@ -40,4 +40,3 @@ fetch(jsonFile)
         console.log(listCourses(data));
         document.getElementById('dataContainer').textContent = JSON.stringify(data, null, 2);
     });
-
