@@ -12,7 +12,7 @@ import datetime
 # Constants and variables
 invNum = 20
 invDate = datetime.datetime.now()
-invDateFormat = invDate.strftime('%Y-%M-%d')
+invDateFormat = invDate.strftime('%Y-%m-%d')
 HST_RATE = 0.15
 subtotal = 0 # initialize subtotal
 # Declare program functions.
@@ -36,21 +36,21 @@ def updateFile():
     header = "Invoice #, Invoice Date, Driver #, Item #, Item Desc., Item Cost, Item Quantity, Item Total, subtotal, HST, total\n"
     try:
         with open("expenses.dat", "a") as f:
-            f.write(f"{invNum}")
-            f.write(f"{invDateFormat}")
-            f.write(f"{driverNum}")
-            f.write(f"{itemNum}")
-            f.write(f"{descript}")
-            f.write(f"{cost}")
-            f.write(f"{quantity}")
-            f.write(f"{itemTotal}")
-            f.write(f"{hst}")
-            f.write(f"{subtotal}")
-            f.write(f"{total}")
+            f.write(f"{invNum}, ")
+            f.write(f"{invDateFormat}, ")
+            f.write(f"{driverNum}, ")
+            f.write(f"{itemNum}, ")
+            f.write(f"{descript}, ")
+            f.write(f"{cost:.2f}, ")
+            f.write(f"{quantity}, ")
+            f.write(f"{itemTotal:.2f}, ")
+            f.write(f"{hst:.2f}, ")
+            f.write(f"{subtotal:.2f}, ")
+            f.write(f"{total:.2f}\n")
     except FileNotFoundError:
         with open("expenses.dat", "w") as f:
             f.write(header)
-
+            updateFile()
 # Main program starts here.
 
 while True:
@@ -74,7 +74,7 @@ while True:
     descript = input("Enter a brief description of item: ")
     while True:
         cost = input("Enter cost of item: ")
-        if cost.isdigit():
+        if cost.replace('.', '', 1).isdigit():
             cost = float(cost)
             break
         else:
@@ -94,10 +94,10 @@ while True:
     subtotal += itemTotal
     hst = subtotal * HST_RATE
     total = subtotal + hst
+    
     # Append info to file.
     
     invNum = getLastInvNum(invNum)
-    invNum += 1
     updateFile()
     
     # Output values.
@@ -108,7 +108,7 @@ while True:
     print("----------------------------------------------------------")
     print(f"Invoice #:  {invNum:>8d}           Invoice Date:  {invDateFormat}")
     print(f"Driver #:   {driverNum:>8s}")
-    print(f"Item #:     {itemNum:>8s}           Item Desc.:    {descript:>12s}")
+    print(f"Item #:     {itemNum:>8s}           Item Desc.:    {descript:<12s}")
     print("----------------------------------------------------------")
     print(f"Item Cost:   ${cost:>5.2f}           Item Quantity: {quantity:>5d}")
     print(f"Item Total:  ${itemTotal:>5.2f}           HST:           ${hst:>5.2f}")
@@ -122,6 +122,9 @@ while True:
             break
         elif cont == "Y":
             running = True
+            invDate = datetime.datetime.now()
+            invDateFormat = invDate.strftime("%Y-%m-%d")
+            subtotal = 0
             break
         else:
             print("Please enter a Y or an N.")
