@@ -15,7 +15,6 @@ invDate = datetime.datetime.now()
 invDateFormat = invDate.strftime('%Y-%M-%d')
 HST_RATE = 0.15
 subtotal = 0 # initialize subtotal
-
 # Declare program functions.
 
 def getLastInvNum(invNum):
@@ -55,8 +54,7 @@ def updateFile():
 # Main program starts here.
 
 while True:
-
-    # Parse values from file and apply to constants.
+    running = True
 
     # Collect User inputs.
     print()
@@ -84,7 +82,7 @@ while True:
     while True:
         quantity = input("Enter the quantity of the item: ")
         if quantity.isdigit():
-            quantity = float(quantity)
+            quantity = int(quantity)
             break
         else:
             print("Please enter a number.")
@@ -92,12 +90,13 @@ while True:
     # Perform required calculations.
 
     itemTotal = cost * quantity
+    itemTotal = float(itemTotal)
     subtotal += itemTotal
     hst = subtotal * HST_RATE
     total = subtotal + hst
     # Append info to file.
     
-    getLastInvNum(invNum)
+    invNum = getLastInvNum(invNum)
     invNum += 1
     updateFile()
     
@@ -105,16 +104,24 @@ while True:
     print("----------------------------------------------------------")
     print()
     print()
-    print("       HAB Taxi Services Expense Report")
-    print("------------------------------------------------")
-    print(f"Invoice #:  {invNum}             Invoice Date:  {invDateFormat}")
-    print(f"Driver #:   {driverNum}")
-    print(f"Item #:     {itemNum}           Item Desc.:    {descript}")
+    print("              HAB Taxi Services Expense Report")
     print("----------------------------------------------------------")
-    print(f"Item Cost:  {cost}           Item Quantity: {quantity}")
-    print(f"Item Total: {itemTotal}          HST:           {hst}")
-    print(f"subtotal:   {subtotal}          Total:         {total}")
+    print(f"Invoice #:  {invNum:>8d}           Invoice Date:  {invDateFormat}")
+    print(f"Driver #:   {driverNum:>8s}")
+    print(f"Item #:     {itemNum:>8s}           Item Desc.:    {descript:>12s}")
+    print("----------------------------------------------------------")
+    print(f"Item Cost:   ${cost:>5.2f}           Item Quantity: {quantity:>5d}")
+    print(f"Item Total:  ${itemTotal:>5.2f}           HST:           ${hst:>5.2f}")
+    print(f"subtotal:    ${subtotal:>5.2f}           Total:         ${total:5.2f}")
 
     # Prompt to create another invoice.
-    cont = input("Would you like to create another invoice?(Y/N): ").upper()
-    if cont
+    while True:
+        cont = input("Would you like to create another invoice?(Y/N): ").upper()
+        if cont == "N":
+            running = False
+            break
+        elif cont == "Y":
+            running = True
+            break
+        else:
+            print("Please enter a Y or an N.")
