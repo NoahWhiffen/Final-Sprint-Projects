@@ -2,7 +2,7 @@
 # Description: A program for HAB Taxi 
 #              Services to record expenses.
 # Author:      Noah Whiffen - SD12 - Robot Group 9
-# Date:        August 3rd, 2024 - 
+# Date:        August 3rd, 2024 - August 6th, 2024
 
 
 # Import required libraries.
