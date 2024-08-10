@@ -2,7 +2,7 @@
 # Description: A program to calculate the 
 #              stand fee for HAB Taxi Services
 # Author:      Noah Whiffen - SD12 - Robot Group 9
-# Date:        August 6th, 2024 - 
+# Date:        August 6th, 2024 - August 10th, 2024
 
 
 # Program libraries
@@ -21,7 +21,6 @@ def paymentDate():
 
 
 def employeeFile():
-    global empHeader, driverNum, name, address, phoneNum, licenseNum, licenseExpDate, insProvider, policyNum, carOwner, balDue
     try:
         with open("employees.dat", "r") as file:
             lines = file.readlines()
@@ -44,8 +43,7 @@ def employeeFile():
             file.write("Driver #, Name, Address, Phone #, License #, License Exp. Date, Insurance Provider, Ins. Policy #, Car Owner, Bal. Due\n")
 
 def revenueFile():
-    global revHeader, transID, revDriverNum, transDate, transDesc, transAmt, hst, total
-    try:
+    try:    
         with open("revenue.dat", "r") as file:
             lines = file.readlines()
             revHeader = lines[0].strip()
@@ -85,8 +83,8 @@ standFeeTotal = standFeeHST + standFee
 
 while True:
     if today.day == 1:
-        employeeFile()
-        revenueFile()
+        employeeF = employeeFile()
+        revenueF = revenueFile()
         if name == carOwner:
             newTransNum = nextTransNum
             nextTransNum += 1
