@@ -43,25 +43,25 @@ def employeeFile():
         with open("employees.dat", "a") as file:
             file.write("Driver #, Name, Address, Phone #, License #, License Exp. Date, Insurance Provider, Ins. Policy #, Car Owner, Bal. Due\n")
 
-# def revenueFile():
-#    global revHeader, transID, revDriverNum, transDate, transDesc, transAmt, hst, total
-#    try:
-#        with open("revenue.dat", "r") as file:
-#            lines = file.readlines()
-#            revHeader = lines[0].strip()
-#            for line in lines[1:]:
-#                revenueData = line.strip().split(", ")
-#               transID = revenueData[0]
-#                revDriverNum = revenueData[1]
-#                transDate = revenueData[2]
-#                transDesc = revenueData[3]
-#                transAmt = revenueData[4]
-#                hst = revenueData[5]
-#                total = revenueData[6]
-#                return revHeader, transID, revDriverNum, transDate, transDesc, transAmt, hst, total
-#    except FileNotFoundError:
-#        with open("revenue.dat", "a") as file:
-#                file.write("Trans. ID, Driver #, Trans. Date, Trans. Desc., Trans. Amt., HST, total\n")
+def revenueFile():
+    global revHeader, transID, revDriverNum, transDate, transDesc, transAmt, hst, total
+    try:
+        with open("revenue.dat", "r") as file:
+            lines = file.readlines()
+            revHeader = lines[0].strip()
+            for line in lines[1:]:
+                revenueData = line.strip().split(", ")
+                transID = revenueData[0]
+                revDriverNum = revenueData[1]
+                transDate = revenueData[2]
+                transDesc = revenueData[3]
+                transAmt = revenueData[4]
+                hst = revenueData[5]
+                total = revenueData[6]
+                return revHeader, transID, revDriverNum, transDate, transDesc, transAmt, hst, total
+    except FileNotFoundError:
+        with open("revenue.dat", "a") as file:
+                file.write("Trans. ID, Driver #, Trans. Date, Trans. Desc., Trans. Amt., HST, total\n")
 
 # Constants.
 with open("defaults.dat", "r") as file:
@@ -84,9 +84,9 @@ standFeeTotal = standFeeHST + standFee
 # Main program starts here.
 
 while True:
-    employeeFile()
-    # revenueFile()
     if today.day == 1:
+        employeeFile()
+        revenueFile()
         if name == carOwner:
             newTransNum = nextTransNum
             nextTransNum += 1
