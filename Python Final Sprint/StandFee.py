@@ -22,7 +22,7 @@ def paymentDate():
 
 def employeeFile():
     try:
-        with open("employees.dat", "r") as file:
+        with open("employees.dat", "a") as file:
             lines = file.readlines()
             empHeader = lines[0].strip()
             for line in lines[1:]:
@@ -83,15 +83,18 @@ standFeeTotal = standFeeHST + standFee
 
 while True:
     if today.day == 1:
-        employeeF = employeeFile()
-        revenueF = revenueFile()
-        if name == carOwner:
-            newTransNum = nextTransNum
-            nextTransNum += 1
-            newDriverNum = nextDriverNum
-            nextDriverNum += 1
-            with open("revenue.dat", "a") as f:
-                f.write(f"{nextTransNum}, {paymentDate}, Monthly Stand Fees, {nextDriverNum}, {standFee}, {standFeeHST}, {standFeeTotal} ")
+        empHeader, employees = employeeFile()
+        revHeader, revenues = revenueFile()
+        if empHeader and employees:
+            for employeeData in employees:
+                driverNum, name, address, phoneNum, licenseNum, licenseExpDate, insProvider, policyNum, carOwner, balDue = employeeData
+            if name == carOwner:
+                newTransNum = nextTransNum
+                nextTransNum += 1
+                newDriverNum = nextDriverNum
+                nextDriverNum += 1
+                with open("revenue.dat", "a") as f:
+                    f.write(f"{nextTransNum}, {paymentDate}, Monthly Stand Fees, {nextDriverNum}, {standFee}, {standFeeHST}, {standFeeTotal} ")
                 
 
     # The balance due will be updated next.
