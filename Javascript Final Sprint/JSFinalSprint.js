@@ -2,8 +2,8 @@
 // Author: Noah Whiffen
 // Dates: July 30, 2024 - July 31, 2024
 
-// You may have to run this with Live Server. The CORS policy wouldn't let me run the program and this was the
-// only way I could find to pass it.
+// You may have to run this with Live Server. The CORS policy wouldn't let 
+// me run the program and this was the only way I could find to pass it.
 
 const jsonFile = "data.json";
 
